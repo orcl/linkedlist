@@ -68,12 +68,40 @@ typedef struct student
     
 }//end create()
 
+void display(STU* head)
+{
+    STU* p=NULL;
+    
+    //use a for loop to display all the nodes
+    for (p = head; p!=NULL; p=p->next)
+    {
+        printf("student number is %d, score is %d\n", p->num, p->score);
+    }
+}
+
+void freeall(STU* head)
+{
+    STU* p=NULL, *q = NULL;
+    
+    p=head;
+    while (p->next!=NULL)
+    {
+        q =p->next;
+        p->next = q->next;
+        free(q);
+    }
+    //after the for loop, we have to free the head node
+    free(head);
+}
+
 
 void main(void)
 {
     STU* head = NULL;
     head = create();
     display(head);
+    freeall(head);
+   // display(head);
 }
 
 
