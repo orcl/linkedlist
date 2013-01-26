@@ -88,11 +88,41 @@ void freeall(STU* head)
     {
         q =p->next;
         p->next = q->next;
+        printf("student %d is going to be deleted\n",q->num);
         free(q);
+        
     }
     //after the for loop, we have to free the head node
+    printf("student %d is going to be deleted\n",head->num);
     free(head);
+    head = NULL;
 }
+
+
+STU* reverse(STU* head)
+{
+    STU* p1=NUll, *p2=NULL, *p3=NULL;
+    
+    if (head ==NULL||head->next==NULL)
+    {
+        return head;
+    }
+   
+    p1=head;
+    p2=p1->next;
+    while (p2!=NULL)
+    {
+        p3=p2->next;
+        p2->next = p1;
+        p1=p2;
+        p2=p3;
+        
+    }
+    head->next = NULL;//adjust the head next pointer to null
+    head = p1; //this time the head is on the other end now.
+    return head; //return head.
+    
+}//end reverse
 
 
 void main(void)
@@ -101,7 +131,7 @@ void main(void)
     head = create();
     display(head);
     freeall(head);
-   // display(head);
+    display(head);
 }
 
 
