@@ -124,24 +124,101 @@ STU* reverse(STU* head)
     
 }//end reverse
 
+STU* del(STU* head, int num)
+{
+    STU* p1 =NULL, *p2 = NULL;
+    p1=head;
+    
+    //this while loop is for finding the position
+    while(num!=p1->num && p1->next!=NULL)
+    {
+        p2 = p1;
+        p1 = p1->next;
+    }
+    
+    //check if it's the node to be deleted.
+    if (num==p1->num)
+    {
+        if (p1==head) //if the node we found is the head, update the head, then delete p1 node.
+        {
+            head = p1->next;
+            free(p1);
+        }
+        else          //if the node we found is not the head, we simply just delete p1 node
+        {
+            p2->next = p1->next;
+            free(p1);
+        }
+    }
+    else
+    {
+        printf("can't find the node\n");
+    }
+    
+    return head;
+}
+
+STU* append(STU* head, STU* t)
+{
+    STU* p=NULL;
+    
+    //we need to find the last node
+    p = head;
+    while (p->next!=NULL)
+    {
+        p = p->next;
+    }
+    
+    //add the node at the end
+    p->next = t;
+    t->next = NULL;
+    return head;
+    
+}//end append
+
+
+STU* prepend(STU* head, STU* t)
+{
+    //we need to append the node at the beginning of the list
+    t->next = head;
+    head = t;
+    return head;
+}
+
 
 void main(void)
 {
     STU* head = NULL;
+    STU* head1 = NULL;
+    STU* head2 = NULL;
+    head1 = (STU*)malloc(sizeof(STU));
+    head1->num = 4;
+    head1->score = 96;
+    head1->next = NULL;
+    
+    head2 = (STU*)malloc(sizeof(STU));
+    head2->num = 5;
+    head2->score =95;
+    head2->next =NULL;
+    
     head = create();
     display(head);
-    head = reverse(head);
+    //head = reverse(head);
+    //display(head);
+   // head = del(head, 3);
+   // display(head);
+    
+    head = append(head, head1);
+   // display(head);
+    printf("------------------------------------------\n");
+   
+    head = prepend(head, head2);
     display(head);
+    
+    
     freeall(head);
     display(head);
 }
 
 
 
-//method prepend
-
-//method append
-
-//method freeall
-
-//method delete
