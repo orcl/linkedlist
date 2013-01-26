@@ -101,7 +101,7 @@ void freeall(STU* head)
 
 STU* reverse(STU* head)
 {
-    STU* p1=NUll, *p2=NULL, *p3=NULL;
+    STU* p1=NULL, *p2=NULL, *p3=NULL;
     
     if (head ==NULL||head->next==NULL)
     {
@@ -129,6 +129,8 @@ void main(void)
 {
     STU* head = NULL;
     head = create();
+    display(head);
+    head = reverse(head);
     display(head);
     freeall(head);
     display(head);
